@@ -1,0 +1,30 @@
+{
+    "FormattingOptions": {
+        "EnableEditorConfigSupport"                            : true,
+        "IndentSwitchCaseSection"                              : true,
+        "IndentSwitchCaseSectionWhenBlock"                     : true,
+        "IndentSwitchSection"                                  : true,
+        "NewLinesForBracesInAccessors"                         : false,
+        "NewLinesForBracesInAnonymousMethods"                  : false,
+        "NewLinesForBracesInAnonymousTypes"                    : false,
+        "NewLinesForBracesInControlBlocks"                     : false,
+        "NewLinesForBracesInLambdaExpressionBody"              : false,
+        "NewLinesForBracesInMethods"                           : false,
+        "NewLinesForBracesInObjectCollectionArrayInitializers" : false,
+        "NewLinesForBracesInProperties"                        : false,
+        "NewLinesForBracesInTypes"                             : false,
+        "NewLineForCatch"                                      : true,
+        "NewLineForElse"                                       : true,
+        "NewLineForFinally"                                    : true,
+        "SpaceAfterCast"                                       : false,
+        "SpaceAfterColonInBaseTypeDeclaration"                 : true,
+        "SpaceAfterControlFlowStatementKeyword"                : false,
+        "SpaceAfterMethodCallName"                             : false,
+        "SpaceAfterSemicolonsInForStatement"                   : true,
+        "SpaceBetweenEmptyMethodCallParentheses"               : false,
+        "SpaceBetweenEmptyMethodDeclarationParentheses"        : false,
+        "SpaceBetweenEmptySquareBrackets"                      : false,
+        "SpaceWithinOtherParentheses"                          : false,
+        "SpacingAfterMethodDeclarationName"                    : false
+    }
+}
