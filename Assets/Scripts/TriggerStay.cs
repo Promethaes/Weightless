@@ -3,12 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
-public class TriggerEnter : MonoBehaviour
-{
+public class TriggerStay : MonoBehaviour {
     public UnityEvent withinRangeEvent;
     public UnityEvent exitRangeEvent;
 
-    private void OnTriggerEnter2D(Collider2D other) {
+    private void OnTriggerStay2D(Collider2D other) {
         withinRangeEvent?.Invoke();
     }
 
