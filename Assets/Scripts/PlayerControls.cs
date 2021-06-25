@@ -17,6 +17,7 @@ public class PlayerControls : MonoBehaviour {
     public float dashTimer = 0.5f;
     public float dashCooldown = 0.5f;
     public float grappleSpeed = 5.0f;
+    public int grappleCharges = 0;
 
     [Space(10.0f)]
     [Header("Unlocks")]
@@ -75,7 +76,6 @@ public class PlayerControls : MonoBehaviour {
 
     public void OnMouse(CallbackContext ctx) {
         _mouseVec = ctx.ReadValue<Vector2>();
-        Debug.Log(_mouseVec);
     }
 
     public void ResetJumpComplete() {
@@ -161,7 +161,8 @@ public class PlayerControls : MonoBehaviour {
             return;
         if(ctx.canceled)
             _grappleComplete = true;
-        else if(ctx.performed) {
+        else if(ctx.performed && grappleCharges > 0) {
+            grappleCharges--;
             _grappleComplete = false;
             IEnumerator GrappleHook() {
                 grappleHook.SetActive(true);
@@ -208,5 +209,9 @@ public class PlayerControls : MonoBehaviour {
             _lerping = false;
         }
         StartCoroutine(LerpToGrapple());
+    }
+
+    public void AddGrappleCharge(){
+        grappleCharges++;
     }
 }
