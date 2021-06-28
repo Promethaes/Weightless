@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &1759327035999014573
+--- !u!1 &6624542236102630397
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,39 +8,40 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 2200775235785666610}
-  - component: {fileID: 7263965152344531139}
-  - component: {fileID: 343763509752653694}
-  - component: {fileID: 8949140958343277589}
-  - component: {fileID: 781631640224487382}
-  m_Layer: 8
-  m_Name: Tile
+  - component: {fileID: 6705791555736003938}
+  - component: {fileID: 2831551814061634963}
+  - component: {fileID: 5134160310437032494}
+  - component: {fileID: 4590510283285166405}
+  - component: {fileID: 370901040}
+  - component: {fileID: 4188029330318565653}
+  m_Layer: 0
+  m_Name: JumpPad
   m_TagString: Terrain
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &2200775235785666610
+--- !u!4 &6705791555736003938
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1759327035999014573}
+  m_GameObject: {fileID: 6624542236102630397}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -1}
-  m_LocalScale: {x: 3.0398662, y: 3.0398662, z: 3.0398662}
+  m_LocalPosition: {x: -2.51, y: -2.751, z: 0.24609375}
+  m_LocalScale: {x: 3.3397334, y: 0.4126069, z: 3.0398662}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!212 &7263965152344531139
+--- !u!212 &2831551814061634963
 SpriteRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1759327035999014573}
+  m_GameObject: {fileID: 6624542236102630397}
   m_Enabled: 1
   m_CastShadows: 0
   m_ReceiveShadows: 0
@@ -74,7 +75,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: f9827d85287db7e43bbe27af949dd332, type: 3}
-  m_Color: {r: 0.08988963, g: 0.17550729, b: 0.18867922, a: 1}
+  m_Color: {r: 0.17149772, g: 0.6037736, b: 0.14524741, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -84,13 +85,13 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!61 &343763509752653694
+--- !u!61 &5134160310437032494
 BoxCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1759327035999014573}
+  m_GameObject: {fileID: 6624542236102630397}
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 6200000, guid: 7fc9b4ef5cd3c7e4eb8af62e5bb93db1, type: 2}
@@ -110,13 +111,13 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.32, y: 0.32}
   m_EdgeRadius: 0
---- !u!61 &8949140958343277589
+--- !u!61 &4590510283285166405
 BoxCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1759327035999014573}
+  m_GameObject: {fileID: 6624542236102630397}
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
@@ -136,24 +137,99 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.32, y: 0.32}
   m_EdgeRadius: 0
---- !u!50 &781631640224487382
-Rigidbody2D:
-  serializedVersion: 4
+--- !u!114 &370901040
+MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1759327035999014573}
-  m_BodyType: 0
-  m_Simulated: 1
-  m_UseFullKinematicContacts: 0
-  m_UseAutoMass: 0
-  m_Mass: 1
-  m_LinearDrag: 1
-  m_AngularDrag: 1
-  m_GravityScale: 0
-  m_Material: {fileID: 0}
-  m_Interpolate: 0
-  m_SleepingMode: 1
-  m_CollisionDetection: 1
-  m_Constraints: 7
+  m_GameObject: {fileID: 6624542236102630397}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 89db26bd63d9ef54984bf07e2784b745, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tag: Player
+  withinRangeEvent:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 0}
+        m_MethodName: JumpPad
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 4188029330318565653}
+        m_MethodName: Animate
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  exitRangeEvent:
+    m_PersistentCalls:
+      m_Calls: []
+--- !u!114 &4188029330318565653
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6624542236102630397}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6dc94530b51293a449cd4a3f3e35528c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  curve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 2
+      outSlope: 2
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 0.06306094
+      value: 0.9974432
+      inSlope: -0.020153392
+      outSlope: -0.020153392
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.40639734
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.5021348
+      value: 0.49660116
+      inSlope: -1.5143527
+      outSlope: -1.5143527
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.17690437
+      outWeight: 0.1270293
+    - serializedVersion: 3
+      time: 0.99250126
+      value: 0.002357483
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  exaggurationScalar: 2.5

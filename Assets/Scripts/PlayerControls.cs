@@ -18,6 +18,15 @@ public class PlayerControls : MonoBehaviour {
     public float dashCooldown = 0.5f;
     public float grappleSpeed = 5.0f;
     public int grappleCharges = 0;
+    [Tooltip("A scalar for the jump pad that ignores weight factor")]
+    public float jumpPadForce = 15.0f;
+
+    [Space(10.0f)]
+    [Header("Resources")]
+    public float maxHP;
+    public float currentHP;
+    //[Tooltip("Calculated based on weight factor")]
+    //public float currentArmour;
 
     [Space(10.0f)]
     [Header("Unlocks")]
@@ -30,6 +39,10 @@ public class PlayerControls : MonoBehaviour {
     public Rigidbody2D rigidbody2D;
     public GameObject grappleHook;
     public Camera camera;
+    public GameObject groundCollider;
+    public GameObject unlockDashText;
+    public GameObject unlockJetpackText;
+    public GameObject unlockGrappleText;
 
     Vector2 _moveVec = Vector2.zero;
     Vector2 _mouseVec = Vector2.zero;
@@ -46,10 +59,47 @@ public class PlayerControls : MonoBehaviour {
     float _dashTimer = 0.0f;
 
     bool _grappleComplete = false;
+    
+    [HideInInspector] public bool interactPressed;
+
+    [HideInInspector] public bool disableDash = false;
 
     private void Start() {
         _jumpForce = jumpForce;
         grappleHook.transform.SetParent(null);
+        currentHP = maxHP;
+
+        IEnumerator DeathCheck() {
+            while(true) {
+                yield return new WaitForEndOfFrame();
+                if(currentHP <= 0.0f) {
+                    Debug.Log("I'm dead, chief");
+                }
+            }
+        }
+        StartCoroutine(DeathCheck());
+
+        IEnumerator UnlockCheck(){
+            bool unDash = false;
+            bool unJetpack = false;
+            bool unGrapple = false;
+            void helper(bool classLevel,ref bool localLevel,GameObject ui){
+                if(classLevel && !localLevel){
+                    localLevel = true;
+                    ui.transform.position = camera.WorldToScreenPoint(transform.position + new Vector3(0.0f,0.5f,0.0f));
+                    ui.SetActive(true);
+                }
+            }
+            while(true){
+                yield return new WaitForEndOfFrame();
+                helper(obtainedDash,ref unDash,unlockDashText);
+                helper(obtainedJetpack,ref unJetpack,unlockJetpackText);
+                helper(obtainedGrapple,ref unGrapple,unlockGrappleText);
+                if(unDash && unJetpack && unGrapple)
+                    yield break;
+            }
+        }
+        StartCoroutine(UnlockCheck());
     }
 
     private void FixedUpdate() {
@@ -81,7 +131,35 @@ public class PlayerControls : MonoBehaviour {
     public void ResetJumpComplete() {
         jumpComplete = false;
         _dashComplete = false;
-        _jetComplete =  false;
+        _jetComplete = false;
+        groundCollider.SetActive(false);
+    }
+
+    public void PreventDash() {
+        disableDash = true;
+    }
+    public void AllowDash() {
+        disableDash = false;
+    }
+
+    public void JumpPad() {
+        var force = new Vector2(0.0f, jumpPadForce * weightFactor);
+        rigidbody2D.AddForce(force, ForceMode2D.Impulse);
+    }
+
+    public void TakeDamage(float damage) {
+        currentHP -= damage;
+    }
+
+    public void LoseArmourPiece(float amount){
+        weightFactor -= amount;
+    }
+
+    public void OnInteract(CallbackContext ctx){
+        if(ctx.performed)
+            interactPressed = true;
+        else
+            interactPressed = false;
     }
 
     public void OnJump(CallbackContext ctx) {
@@ -130,25 +208,26 @@ public class PlayerControls : MonoBehaviour {
     }
 
     public void OnDash(CallbackContext ctx) {
-        if(!obtainedDash || _jetOn || _dashComplete || grappleHook.activeSelf)
+        if(!obtainedDash || _jetOn || _dashComplete || grappleHook.activeSelf || disableDash)
             return;
         if(ctx.canceled) {
             _dashComplete = true;
             _dashTimer = 0.0f;
         }
-        else if(ctx.performed) {
+        else if(ctx.performed && Mathf.Abs(_moveVec.x) > 0.5f) {
             IEnumerator Dash() {
                 rigidbody2D.constraints = RigidbodyConstraints2D.FreezePositionY | RigidbodyConstraints2D.FreezeRotation;
+                var vec = _moveVec;
+                vec.y = 0.0f;
+                disableDash = true;
                 while(_dashTimer < dashTimer) {
                     yield return new WaitForFixedUpdate();
                     _dashTimer += Time.fixedDeltaTime;
-                    var vec = _moveVec;
-                    vec.y = 0.0f;
                     rigidbody2D.AddForce(vec * dashForce, ForceMode2D.Impulse);
-
                 }
                 rigidbody2D.constraints = RigidbodyConstraints2D.FreezeRotation;
                 _dashTimer = 0.0f;
+                disableDash = false;
                 _dashComplete = true;
             }
             StartCoroutine(Dash());
@@ -211,7 +290,11 @@ public class PlayerControls : MonoBehaviour {
         StartCoroutine(LerpToGrapple());
     }
 
-    public void AddGrappleCharge(){
+    public void AddGrappleCharge() {
         grappleCharges++;
+    }
+
+    public void OnRoomChange() {
+
     }
 }
