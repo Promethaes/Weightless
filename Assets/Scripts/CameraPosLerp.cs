@@ -4,8 +4,11 @@ using UnityEngine;
 
 public class CameraPosLerp : MonoBehaviour {
     [SerializeField] AnimationCurve lerpCurve;
+    bool _lerping = false;
 
+    public bool isLerping() { return _lerping; }
     IEnumerator Lerp(Vector2 newPos) {
+        _lerping = true;
         float x = 0.0f;
         var pos = gameObject.transform.position;
         while(x < 1.0f) {
@@ -14,9 +17,12 @@ public class CameraPosLerp : MonoBehaviour {
             var pVec = Vector2.Lerp(pos, newPos, lerpCurve.Evaluate(x));
             gameObject.transform.position = new Vector3(pVec.x, pVec.y, -10.0f);
         }
+        _lerping = false;
     }
     public void LerpPosition(Vector2 newPos) {
-        StopCoroutine(Lerp(newPos));
+        if(_lerping)
+            return;
+        //StopCoroutine(Lerp(newPos));
         StartCoroutine(Lerp(newPos));
     }
 

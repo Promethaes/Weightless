@@ -8,6 +8,7 @@ public class FountainOfLight : MonoBehaviour {
     public bool unlockDash = false;
     public bool unlockJetpack = false;
     public bool unlockGrapple = false;
+    public float armorReduction = 0.25f;
     PlayerControls playerControls = null;
     bool _lerping = false;
     Vector3 originalScale = Vector3.one;
@@ -23,7 +24,7 @@ public class FountainOfLight : MonoBehaviour {
         if(playerControls == null)
             playerControls = other.gameObject.GetComponent<PlayerControls>();
         if(playerControls.interactPressed) {
-            playerControls.LoseArmourPiece(0.25f);
+            playerControls.LoseArmourPiece(armorReduction);
             _lerping = true;
             StartCoroutine(Lerp());
         }

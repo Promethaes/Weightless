@@ -43,6 +43,9 @@ public class PlayerControls : MonoBehaviour {
     public GameObject unlockDashText;
     public GameObject unlockJetpackText;
     public GameObject unlockGrappleText;
+    public GameObject deathScreenEffect;
+    public IconActivator armourIcons;
+    public IconActivator healthIcons;
 
     Vector2 _moveVec = Vector2.zero;
     Vector2 _mouseVec = Vector2.zero;
@@ -73,7 +76,12 @@ public class PlayerControls : MonoBehaviour {
             while(true) {
                 yield return new WaitForEndOfFrame();
                 if(currentHP <= 0.0f) {
-                    Debug.Log("I'm dead, chief");
+                    //do some effect or something
+                    deathScreenEffect.SetActive(true);
+                    yield return new WaitForSeconds(0.5f);
+                    var spawnpoint = GameObject.FindGameObjectWithTag("Respawn");
+                    gameObject.transform.position = spawnpoint.transform.position;
+                    currentHP = maxHP;
                 }
             }
         }
@@ -86,7 +94,6 @@ public class PlayerControls : MonoBehaviour {
             void helper(bool classLevel,ref bool localLevel,GameObject ui){
                 if(classLevel && !localLevel){
                     localLevel = true;
-                    ui.transform.position = camera.WorldToScreenPoint(transform.position + new Vector3(0.0f,0.5f,0.0f));
                     ui.SetActive(true);
                 }
             }
@@ -102,7 +109,14 @@ public class PlayerControls : MonoBehaviour {
         StartCoroutine(UnlockCheck());
     }
 
+    private void Update() {
+        armourIcons.data = (weightFactor*100.0f) - 100.0f;
+        healthIcons.data = currentHP;
+    }
+
     private void FixedUpdate() {
+        if(deathScreenEffect.activeSelf)
+            return;
         rigidbody2D.mass = weightFactor;
         var force = _moveVec * moveSpeed;
         force.y = 0.0f;
@@ -144,15 +158,20 @@ public class PlayerControls : MonoBehaviour {
 
     public void JumpPad() {
         var force = new Vector2(0.0f, jumpPadForce * weightFactor);
+        rigidbody2D.velocity = Vector2.zero;
         rigidbody2D.AddForce(force, ForceMode2D.Impulse);
     }
 
     public void TakeDamage(float damage) {
-        currentHP -= damage;
+        currentHP -= damage / weightFactor;
     }
 
     public void LoseArmourPiece(float amount){
         weightFactor -= amount;
+    }
+
+    public void SpawnAtSpawnPoint(GameObject sp){
+        gameObject.transform.position = sp.transform.position;
     }
 
     public void OnInteract(CallbackContext ctx){
