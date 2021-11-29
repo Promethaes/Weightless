@@ -62,7 +62,9 @@ public class PlayerControls : MonoBehaviour {
     float _dashTimer = 0.0f;
 
     bool _grappleComplete = false;
-    
+
+    bool _canMove = true;
+
     [HideInInspector] public bool interactPressed;
 
     [HideInInspector] public bool disableDash = false;
@@ -87,21 +89,21 @@ public class PlayerControls : MonoBehaviour {
         }
         StartCoroutine(DeathCheck());
 
-        IEnumerator UnlockCheck(){
+        IEnumerator UnlockCheck() {
             bool unDash = false;
             bool unJetpack = false;
             bool unGrapple = false;
-            void helper(bool classLevel,ref bool localLevel,GameObject ui){
-                if(classLevel && !localLevel){
+            void helper(bool classLevel, ref bool localLevel, GameObject ui) {
+                if(classLevel && !localLevel) {
                     localLevel = true;
                     ui.SetActive(true);
                 }
             }
-            while(true){
+            while(true) {
                 yield return new WaitForEndOfFrame();
-                helper(obtainedDash,ref unDash,unlockDashText);
-                helper(obtainedJetpack,ref unJetpack,unlockJetpackText);
-                helper(obtainedGrapple,ref unGrapple,unlockGrappleText);
+                helper(obtainedDash, ref unDash, unlockDashText);
+                helper(obtainedJetpack, ref unJetpack, unlockJetpackText);
+                helper(obtainedGrapple, ref unGrapple, unlockGrappleText);
                 if(unDash && unJetpack && unGrapple)
                     yield break;
             }
@@ -110,12 +112,12 @@ public class PlayerControls : MonoBehaviour {
     }
 
     private void Update() {
-        armourIcons.data = (weightFactor*100.0f) - 100.0f;
+        armourIcons.data = (weightFactor * 100.0f) - 100.0f;
         healthIcons.data = currentHP;
     }
 
     private void FixedUpdate() {
-        if(deathScreenEffect.activeSelf)
+        if(deathScreenEffect.activeSelf || !_canMove)
             return;
         rigidbody2D.mass = weightFactor;
         var force = _moveVec * moveSpeed;
@@ -149,6 +151,10 @@ public class PlayerControls : MonoBehaviour {
         groundCollider.SetActive(false);
     }
 
+    public void SetCanMove(bool yn) {
+        _canMove = yn;
+    }
+
     public void PreventDash() {
         disableDash = true;
     }
@@ -166,15 +172,15 @@ public class PlayerControls : MonoBehaviour {
         currentHP -= damage / weightFactor;
     }
 
-    public void LoseArmourPiece(float amount){
+    public void LoseArmourPiece(float amount) {
         weightFactor -= amount;
     }
 
-    public void SpawnAtSpawnPoint(GameObject sp){
+    public void SpawnAtSpawnPoint(GameObject sp) {
         gameObject.transform.position = sp.transform.position;
     }
 
-    public void OnInteract(CallbackContext ctx){
+    public void OnInteract(CallbackContext ctx) {
         if(ctx.performed)
             interactPressed = true;
         else

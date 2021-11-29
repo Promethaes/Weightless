@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class FountainOfLight : MonoBehaviour {
     public AnimationCurve lerpCurve;
@@ -9,6 +10,8 @@ public class FountainOfLight : MonoBehaviour {
     public bool unlockJetpack = false;
     public bool unlockGrapple = false;
     public float armorReduction = 0.25f;
+
+    public UnityEvent OnEmbraceLight;
     PlayerControls playerControls = null;
     bool _lerping = false;
     Vector3 originalScale = Vector3.one;
@@ -26,6 +29,7 @@ public class FountainOfLight : MonoBehaviour {
         if(playerControls.interactPressed) {
             playerControls.LoseArmourPiece(armorReduction);
             _lerping = true;
+            OnEmbraceLight.Invoke();
             StartCoroutine(Lerp());
         }
     }
