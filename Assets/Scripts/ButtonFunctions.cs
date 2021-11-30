@@ -8,6 +8,16 @@ public class ButtonFunctions : MonoBehaviour {
         Debug.Log("Loading game scene...");
         UnityEngine.SceneManagement.SceneManager.LoadScene("Intro");
     }
+
+    public void ToGameScene(){
+        UnityEngine.SceneManagement.SceneManager.LoadScene("GameScene");
+    }
+
+    public void ToFirstLevel(){
+        UnityEngine.SceneManagement.SceneManager.LoadScene("FirstLevel");
+
+    }
+
     public void QuitGame(){
         Application.Quit();
     }

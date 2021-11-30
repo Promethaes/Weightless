@@ -542,7 +542,7 @@ SpriteShapeRenderer:
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
-  m_DynamicOccludee: 1
+  m_DynamicOccludee: 0
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
@@ -13030,12 +13030,12 @@ PrefabInstance:
     - target: {fileID: 2200775235785666610, guid: 1e58889a85516954dabf6f489fe438f6,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 132.25
+      value: 122.2
       objectReference: {fileID: 0}
     - target: {fileID: 2200775235785666610, guid: 1e58889a85516954dabf6f489fe438f6,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: -54.703
+      value: -41.85
       objectReference: {fileID: 0}
     - target: {fileID: 2200775235785666610, guid: 1e58889a85516954dabf6f489fe438f6,
         type: 3}
@@ -13085,7 +13085,7 @@ PrefabInstance:
     - target: {fileID: 2200775235785666610, guid: 1e58889a85516954dabf6f489fe438f6,
         type: 3}
       propertyPath: m_LocalScale.x
-      value: 201.3814
+      value: 84.754036
       objectReference: {fileID: 0}
     - target: {fileID: 2200775235785666610, guid: 1e58889a85516954dabf6f489fe438f6,
         type: 3}
@@ -13107,8 +13107,57 @@ PrefabInstance:
       propertyPath: m_Color.b
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 343763509752653694, guid: 1e58889a85516954dabf6f489fe438f6, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 1e58889a85516954dabf6f489fe438f6, type: 3}
+--- !u!1 &1427972308 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1759327035999014573, guid: 1e58889a85516954dabf6f489fe438f6,
+    type: 3}
+  m_PrefabInstance: {fileID: 1427972307}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1427972309
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1427972308}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5ee67e0ee39e73741b39c866cdbd0684, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1427972310
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1427972308}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ee7867e6169178745803b4d38fc301cd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tag: Player
+  withinRangeEvent:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1427972309}
+        m_MethodName: ToFirstLevel
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  exitRangeEvent:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1001 &1513976580
 PrefabInstance:
   m_ObjectHideFlags: 0
