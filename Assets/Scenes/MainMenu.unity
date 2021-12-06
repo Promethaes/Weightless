@@ -998,6 +998,16 @@ PrefabInstance:
       propertyPath: m_characterSpacing
       value: 63.39
       objectReference: {fileID: 0}
+    - target: {fileID: 8768134083337187958, guid: 1809c004e02bb7c4cb0b95d0f68b9358,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1800561806}
+    - target: {fileID: 8768134083337187958, guid: 1809c004e02bb7c4cb0b95d0f68b9358,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: QuitGame
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1809c004e02bb7c4cb0b95d0f68b9358, type: 3}
 --- !u!224 &2053622670 stripped

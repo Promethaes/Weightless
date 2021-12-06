@@ -18,6 +18,11 @@ public class ButtonFunctions : MonoBehaviour {
 
     }
 
+    public void ToMainMenu(){
+        UnityEngine.SceneManagement.SceneManager.LoadScene("MainMenu");
+
+    }
+
     public void QuitGame(){
         Application.Quit();
     }
